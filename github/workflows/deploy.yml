@@ -1,0 +1,25 @@
+🚀 Name: Deploy to VM (using SSH) 
+
+🎯 On:
+  📌 Push:
+    🌿 Branches:
+      - master 
+
+🛠 Jobs:
+  🔧 Deploy:
+    💻 Runs-on: ubuntu-latest
+
+    📝 Steps:
+      - 📦 Name: Checkout repository 
+        🛠 Uses: actions/checkout@v2
+
+      - 🚪 Name: SSH and deploy 
+        🛠 Uses: appleboy/ssh-action@master
+        🧩 With:
+          🌐 Host: ${{ secrets.HOST }}
+          👤 Username: ${{ secrets.USERNAME }} ( limited access is better!)
+          🔑 Key: ${{ secrets.SSH_KEY }} (️ special key!)
+          💬 Script: |
+            cd backend-api 
+            npm install 
+            npm start 
